@@ -152,3 +152,18 @@ git clone https://github.com/dusty-nv/jetson-containers
 cd jetson-containers
 bash install.sh
 ```
+
+## 9. Registering the NVIDIA container runtime with Docker
+`nvidia-container-toolkit` is installed by JetPack, but Docker doesn't know
+about it until you register it — without this step, `docker run --runtime=nvidia
+...` fails with `unknown or invalid runtime name: nvidia`, and GPU-accelerated
+containers (CUDA, TensorRT, etc.) can't see the GPU at all.
+```bash
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+docker info | grep -A3 Runtimes     # confirm "nvidia" is listed alongside "runc"
+```
+This merges an `nvidia` entry into `/etc/docker/daemon.json` alongside the
+`data-root` setting from step 7 — it doesn't overwrite it. Restarting Docker
+stops any currently-running containers, so do this before starting real work,
+not mid-benchmark.

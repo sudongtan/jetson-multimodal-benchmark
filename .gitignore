@@ -1,1 +1,51 @@
+# Claude
 CLAUDE.md
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+*.egg
+.Python
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model weights / container artifacts (large, not for git)
+*.gguf
+*.bin
+*.safetensors
+*.engine
+*.onnx
+*.pt
+*.pth
+*.trt
+*.plan
+
+# Benchmark raw output (keep aggregated results, not raw dumps)
+results/raw/
+
+# Logs
+*.log
+logs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Env / secrets
+.env
+.env.*

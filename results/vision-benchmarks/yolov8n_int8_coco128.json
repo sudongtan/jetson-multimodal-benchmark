@@ -1,0 +1,18 @@
+{
+  "model": "yolov8n_int8",
+  "precision": "int8",
+  "engine_path": "yolov8n_int8.engine",
+  "model_size_mb": 5.284701,
+  "imgsz": 640,
+  "iters": 200,
+  "fps": 139.37373954491886,
+  "latency_ms": {
+    "mean": 7.174952779951127,
+    "p50": 6.9678270010626875,
+    "p95": 7.602344050883403
+  },
+  "map50": 0.6007345016977352,
+  "map50_95": 0.4415238135549371,
+  "timestamp": "2026-09-08T15:36:43",
+  "eval_set": "coco128"
+}
