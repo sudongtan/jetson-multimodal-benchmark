@@ -14,7 +14,7 @@ configuration, the NVIDIA container runtime) are documented in
 | Phase | Goal | Status |
 |---|---|---|
 | Vision (YOLOv8n, TensorRT) | Accuracy vs. speed across FP32/FP16/INT8 | ✅ Done |
-| LLM (llama.cpp vs. MLC) | Framework/quantization comparison | Planned |
+| LLM (llama.cpp vs. MLC vs. TensorRT-Edge-LLM) | Framework/quantization comparison | 🚧 In progress |
 | VLM (LLaVA/VILA) | Image+text latency & memory | Planned |
 | Combined pipeline | Camera → detection → language, live demo | Planned |
 | Systematic sweep | Power mode × concurrency × quantization | Planned |
@@ -48,11 +48,29 @@ this runs under the hood (export → TensorRT engine build → benchmark, per
 precision, inside the `ultralytics/ultralytics:latest-jetson-jetpack6`
 container).
 
+## LLM benchmarks
+
+One model — **Qwen2.5-1.5B-Instruct** — deployed three ways
+(llama.cpp, MLC, TensorRT-Edge-LLM), at matched Q4 / Q8 / FP16
+quantization levels wherever the framework supports it, each measuring
+decode tokens/sec, time-to-first-token (TTFT), and peak memory/power.
+
+**Status:** harness is built, not yet run — see [Status](#status) above.
+Once `results/llm-benchmarks/*.json` are populated this section gets the
+same chart + summary table treatment as the vision benchmarks.
+
+Reproduce with:
+```bash
+sudo nvpmodel -m 2 && sudo jetson_clocks   # MAXN_SUPER, re-apply after reboot
+bash llm-benchmarks/run_all.sh             # downloads models, quantizes/compiles, benchmarks all 3 x quant sweeps
+python3 llm-benchmarks/plot_results.py
+```
+
 ## Repo structure
 
 ```
 vision-benchmarks/    # YOLOv8n: PyTorch -> ONNX -> TensorRT, FP16/INT8 comparison
-llm-benchmarks/       # LLM via llama.cpp, MLC, TensorRT-LLM (planned)
+llm-benchmarks/       # LLM via llama.cpp, MLC, TensorRT-Edge-LLM
 vlm-benchmarks/       # VLM (LLaVA/VILA) benchmarking (planned)
 combined-pipeline/    # perception -> language demo (planned)
 results/              # raw JSON benchmark output, one file per run

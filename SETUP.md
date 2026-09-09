@@ -144,6 +144,7 @@ sudo usermod -aG docker $USER
 # log out and back in (exit SSH session, reconnect) for this to take effect
 docker run hello-world                   # should work without sudo now
 ```
+extra lessons learnt : [LESSON_LEARNT.md](LESSON_LEARNT.md).
 
 ## 8. Installing jetson-containers
 ```bash
