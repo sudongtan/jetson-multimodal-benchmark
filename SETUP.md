@@ -1,8 +1,7 @@
 # Jetson Orin Nano — Hardware & Environment Setup
 
 One-time setup procedures for getting the board flashed, networked, and
-ready for development. Not needed for day-to-day project work — see
-`CLAUDE.md` for that.
+ready for development. Not needed for day-to-day project work.
 
 ## Hardware / environment reference
 - **Board**: Jetson Orin Nano Developer Kit (Super), 8GB RAM, module P3767, carrier P3768 (kit P3766)

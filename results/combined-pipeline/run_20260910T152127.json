@@ -1,0 +1,24 @@
+{
+  "prompt": "Describe this bottle in detail. What is it, and what does it look like?",
+  "detection": {
+    "class_name": "bottle",
+    "confidence": 0.5983123779296875,
+    "box_xyxy": [
+      2.6875,
+      78.625,
+      117.5625,
+      465.5
+    ]
+  },
+  "capture_ms": 1684.09385898849,
+  "vision_inference_ms": 6132.1565820107935,
+  "vlm_wall_ms": 32876.36879598722,
+  "timestamp": "2026-09-10T13:21:23",
+  "description": "Here's a detailed description of the bottle in the image:\n\n**What it is:**\n\nThe bottle is a nasal spray. Specifically, it appears to be a bottle of \"Crodan Spray\" nasal spray.\n\n**What it looks like:**\n\n*   **Shape:** It's a cylindrical bottle with a slightly tapered end.\n*   **Color:** The bottle has a three-color design:\n    *   The lower portion is a bright red.\n    *   The middle portion is a light blue.\n    *   The upper portion is a white.\n*   **Labeling:** The",
+  "preprocessing_ms": 3598.0,
+  "prefill_ms": 4271.74,
+  "decode_ms": 8110.09,
+  "tokens_per_sec": 15.66,
+  "end_to_end_ms": 40692.6192369865,
+  "wall_clock_ms": 59790.125608444214
+}

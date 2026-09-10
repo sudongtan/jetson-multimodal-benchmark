@@ -1,0 +1,17 @@
+{
+  "model": "gemma-3-4b-it",
+  "framework": "llama_cpp",
+  "quantization": "Q4_K_M",
+  "quant_class": "q4",
+  "model_size_mb": 2489.757856,
+  "peak_memory_mb": 7153,
+  "avg_power_w": 9.297,
+  "timestamp": "2026-09-10T12:26:51",
+  "preprocessing_ms": 3604.6666666666665,
+  "prefill_ms": 4193.326666666667,
+  "ttft_ms": 7797.993333333334,
+  "decode_ms": 1485.0233333333333,
+  "tokens_per_sec": 15.479999999999999,
+  "n_predict": 21,
+  "prefill_tokens": 275
+}

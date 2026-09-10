@@ -1,0 +1,29 @@
+{
+  "prompt": "Describe this bottle in detail. What is it, and what does it look like?",
+  "detection": {
+    "class_name": "bottle",
+    "confidence": 0.613236665725708,
+    "box_xyxy": [
+      197.75,
+      145.0,
+      380.1875,
+      476.25
+    ]
+  },
+  "capture_ms": 1680.671791997156,
+  "vision_load_ms": 1.6229190077865496,
+  "vision_cold_inference_ms": 6948.419874999672,
+  "vision_inference_ms": 9.057208997546695,
+  "vlm_wall_ms": 36261.64782200067,
+  "timestamp": "2026-09-10T16:11:01",
+  "description": "Here's a detailed description of the bottle in the image:\n\n**What it is:**\n\nIt appears to be a children's water bottle, likely designed for toddlers or young children. \n\n**What it looks like:**\n\n*   **Shape:** The bottle has a classic, slightly tapered shape, typical of water bottles. It's relatively short and wide.\n*   **Material:** It seems to be made of translucent plastic, likely BPA-free. You can see a little bit of the liquid inside.\n*   **Color:** The bottle itself is clear, but it's decorated with a colorful pattern",
+  "vlm_load_ms": 18723.88,
+  "preprocessing_ms": 3617.0,
+  "prefill_ms": 4268.09,
+  "ttft_ms": 7885.09,
+  "decode_ms": 8138.1,
+  "tokens_per_sec": 15.61,
+  "end_to_end_ms": 37951.37682299537,
+  "compute_only_ms": 16032.247208997547,
+  "wall_clock_ms": 66746.90961837769
+}

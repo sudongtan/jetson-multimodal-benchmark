@@ -1,0 +1,19 @@
+{
+  "prompt": "Describe what you see in this image in detail.",
+  "detection": null,
+  "capture_ms": 1805.3674630064052,
+  "vision_load_ms": 1.5631350106559694,
+  "vision_cold_inference_ms": 6896.214417996816,
+  "vision_inference_ms": 7.655003995751031,
+  "vlm_wall_ms": 35335.09509000578,
+  "timestamp": "2026-09-10T15:46:06",
+  "description": "Here's a detailed description of what I see in the image:\n\n**Overall Impression:** The image is a somewhat blurry, close-up shot taken in what appears to be a bathroom or utility area. The lighting is somewhat dim, contributing to the slightly hazy appearance.\n\n**Objects in the Image:**\n\n*   **Spray Bottle:** The most prominent object is a white spray bottle labeled \"Clouds Nison\" (likely a cleaning product). The label is partially visible, showing red, white, and blue colors. The bottle is positioned on a white shelf.\n*   **Shelf:** A white shelf is the surface the spray",
+  "vlm_load_ms": 17737.15,
+  "preprocessing_ms": 3731.0,
+  "prefill_ms": 4349.59,
+  "decode_ms": 8148.15,
+  "tokens_per_sec": 15.59,
+  "end_to_end_ms": 37148.117557007936,
+  "compute_only_ms": 16236.39500399575,
+  "wall_clock_ms": 66740.1032447815
+}

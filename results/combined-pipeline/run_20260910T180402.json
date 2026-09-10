@@ -1,0 +1,28 @@
+{
+  "prompt": "Describe this bottle in detail. What is it, and what does it look like?",
+  "detection": {
+    "class_name": "bottle",
+    "confidence": 0.5467380285263062,
+    "box_xyxy": [
+      197.75,
+      145.25,
+      380.375,
+      475.625
+    ]
+  },
+  "capture_ms": 1683.0215859954478,
+  "vision_load_ms": 1.556927993078716,
+  "vision_cold_inference_ms": 6979.598054997041,
+  "vision_inference_ms": 9.792295008082874,
+  "vlm_wall_ms": 36172.763138994924,
+  "timestamp": "2026-09-10T16:03:59",
+  "description": "Here's a detailed description of the bottle based on the image:\n\n**What it is:**\n\nIt appears to be a children's water bottle, likely designed for toddlers or young children. The shape and features strongly suggest it's intended for use by a young child.\n\n**What it looks like:**\n\n*   **Shape:** The bottle is a classic, slightly tapered cylindrical shape, common for children's water bottles. It has a wide base and tapers towards a narrower neck.\n*   **Material:** It seems to be made of clear, durable plastic.\n*   **Color:** The bottle is",
+  "vlm_load_ms": 18590.41,
+  "preprocessing_ms": 3585.0,
+  "prefill_ms": 4247.86,
+  "decode_ms": 8126.75,
+  "tokens_per_sec": 15.63,
+  "end_to_end_ms": 37865.577019998454,
+  "compute_only_ms": 15969.402295008083,
+  "wall_clock_ms": 66793.79272460938
+}

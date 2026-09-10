@@ -1,0 +1,17 @@
+{
+  "model": "Qwen2.5-VL-3B-Instruct",
+  "framework": "llama_cpp",
+  "quantization": "Q4_K_M",
+  "quant_class": "q4",
+  "model_size_mb": 1929.901056,
+  "peak_memory_mb": 5060,
+  "avg_power_w": 7.212,
+  "timestamp": "2026-09-10T12:29:49",
+  "preprocessing_ms": 1701.3333333333333,
+  "prefill_ms": 2461.0533333333333,
+  "ttft_ms": 4162.386666666666,
+  "decode_ms": 721.3299999999999,
+  "tokens_per_sec": 18.023333333333333,
+  "n_predict": 13,
+  "prefill_tokens": 432
+}
