@@ -1,0 +1,14 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "framework": "llama_cpp",
+  "quantization": "q8_0",
+  "quant_class": "q8",
+  "model_size_mb": 1894.532128,
+  "peak_memory_mb": 3678,
+  "avg_power_w": 12.812,
+  "timestamp": "2026-09-10T09:10:25",
+  "ttft_ms": 43.01980320306029,
+  "tokens_per_sec": 22.491759412859107,
+  "n_predict": 128,
+  "input_tokens": 13
+}

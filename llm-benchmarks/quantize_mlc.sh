@@ -7,7 +7,11 @@ set -euo pipefail
 
 MODEL_PATH=${MODEL_PATH:?set MODEL_PATH to the local unquantized HF model dir}
 QUANT=${QUANT:?set QUANT to an mlc_llm quantization scheme, e.g. q4f16_1 / q0f16}
-MODEL_NAME=$(basename "$MODEL_PATH")
+# Default to basename(MODEL_PATH), but that's often a cache-internal hash rather than a
+# human-readable name (e.g. huggingface-downloader's local path) -- callers that need the
+# output directory name to match something specific (run_all.sh's $OUT) should pass
+# MODEL_NAME explicitly rather than rely on this fallback.
+MODEL_NAME=${MODEL_NAME:-$(basename "$MODEL_PATH")}
 OUTPUT=${MLC_DIST:-/data/models/mlc/dist}/${MODEL_NAME}-${QUANT}
 CONV_TEMPLATE=${CONV_TEMPLATE:-chatml}
 MAX_CONTEXT_LEN=${MAX_CONTEXT_LEN:-2048}

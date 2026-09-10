@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
-# Baseline LLM benchmark: Qwen2.5-1.5B-Instruct via llama.cpp (GGUF, Q4_K_M/Q8_0/FP16),
-# MLC (q4f16_1/q0f16), and TensorRT-Edge-LLM (int4_awq/int8_sq/fp16), each wrapped in a
+# Baseline LLM benchmark (the roadmap's actual Phase 2 requirement): Qwen2.5-1.5B-Instruct
+# via llama.cpp (GGUF, Q4_K_M/Q8_0/FP16) and MLC (q4f16_1/q0f16), each wrapped in a
 # tegrastats capture for peak RAM / avg power. Uses jetson-containers' own run.sh/autotag
 # (per this repo's roadmap) rather than a pinned image tag, since these images are only
 # published through its registry.
+#
+# TensorRT-Edge-LLM is intentionally NOT included here -- see
+# notes/llm-benchmarks.md ("Is TensorRT actually a viable way to deploy an LLM on this
+# board at all?") for why: no prebuilt image, no documented successful build on an Orin
+# Nano by anyone, and NVIDIA's own TensorRT-LLM engineers redirect users away from the
+# TensorRT engine workflow on this exact board. It's kept as an optional stretch goal in
+# run_tensorrt_edgellm.sh, run separately, not as part of the baseline.
 #
 # Run from the repo root:
 #   bash llm-benchmarks/run_all.sh
@@ -46,6 +53,7 @@ for spec in \
         set -e
         MODEL=\$(huggingface-downloader --cache-dir /workspace/.cache/models '$HF_GGUF_REPO/$gguf_file')
         python3 benchmark_llama_cpp.py --model \"\$MODEL\" --quant '$quant' --quant-class '$quant_class' --model-name '$MODEL_NAME'
+        chown -R \"\$(stat -c '%u:%g' /workspace)\" /workspace/results /workspace/.cache
       "
 done
 
@@ -62,34 +70,13 @@ for quant_spec in "q4f16_1 q4" "q0f16 fp16"; do
       "$("$JETSON_CONTAINERS/autotag" mlc)" /bin/bash -c "
         set -e
         HF_MODEL_DIR=\$(huggingface-downloader --cache-dir /workspace/.cache/models '$HF_MODEL')
-        MODEL_PATH=\"\$HF_MODEL_DIR\" QUANT='$quant' CONV_TEMPLATE=chatml bash quantize_mlc.sh
+        MODEL_PATH=\"\$HF_MODEL_DIR\" QUANT='$quant' CONV_TEMPLATE=chatml MODEL_NAME='$MODEL_NAME' bash quantize_mlc.sh
         OUT=/data/models/mlc/dist/${MODEL_NAME}-${quant}
         python3 benchmark_mlc.py --model \"\$OUT\" --model-lib \"\$OUT/${MODEL_NAME}-${quant}-cuda.so\" \
           --quant '$quant' --quant-class '$quant_class' --model-name '$MODEL_NAME'
-      "
-done
-
-# TensorRT-Edge-LLM (NVIDIA/TensorRT-Edge-LLM v0.5.0, via nvidia_modelopt): int4_awq (~Q4),
-# int8_sq (~Q8), and no quantization for the FP16 baseline -- all three run on Ampere,
-# unlike its fp8/nvfp4/mxfp8 schemes which need Hopper+ tensor cores.
-mkdir -p .cache/edgellm
-# "unquantized" builds the fp16 baseline (build_engine_edgellm.sh names its engine dir
-# "fp16" in that case, via QUANT="" -- $tag below mirrors that same fallback).
-for quant_spec in "int4_awq q4" "int8_sq q8" "unquantized fp16"; do
-  read -r quant_env quant_class <<< "$quant_spec"
-  if [ "$quant_env" = "unquantized" ]; then quant_env=""; fi
-  tag=${quant_env:-fp16}
-  echo "=== tensorrt_edgellm $tag ==="
-  run_with_tegrastats "results/llm-benchmarks/tensorrt_edgellm_${tag}.json" \
-    docker run --rm --ipc=host --runtime=nvidia \
-      -v "$(pwd)":/workspace -w /workspace/llm-benchmarks \
-      "$("$JETSON_CONTAINERS/autotag" tensorrt_edgellm)" /bin/bash -c "
-        set -e
-        HF_MODEL_DIR=\$(huggingface-downloader --cache-dir /workspace/.cache/models '$HF_MODEL')
-        MODEL_PATH=\"\$HF_MODEL_DIR\" QUANT='$quant_env' WORKSPACE=/workspace/.cache/edgellm bash build_engine_edgellm.sh
-        python3 benchmark_tensorrt_edgellm.py --engine-dir /workspace/.cache/edgellm/engines/${tag} \
-          --quant '$tag' --quant-class '$quant_class' --model-name '$MODEL_NAME'
+        chown -R \"\$(stat -c '%u:%g' /workspace)\" /workspace/results /workspace/.cache
       "
 done
 
 echo "done. results in results/llm-benchmarks/"
+echo "(TensorRT-Edge-LLM is a separate, optional stretch goal -- see run_tensorrt_edgellm.sh)"

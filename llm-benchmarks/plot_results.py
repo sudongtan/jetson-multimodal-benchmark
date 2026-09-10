@@ -10,6 +10,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
+FRAMEWORK_LABEL = {"llama_cpp": "llama.cpp", "mlc": "MLC", "tensorrt_edgellm": "TensorRT-Edge-LLM"}
 FRAMEWORK_COLOR = {"llama_cpp": "tab:blue", "mlc": "tab:orange", "tensorrt_edgellm": "tab:green"}
 QUANT_ORDER = ["q4", "q8", "fp16"]
 
@@ -36,7 +37,7 @@ def plot(results, out_path: Path):
         offsets = [by_quant[q]["quantization"] if q in by_quant else "" for q in quant_classes]
         bars = ax.bar(
             x + i * width, heights, width,
-            label=framework, color=FRAMEWORK_COLOR.get(framework, "gray"), zorder=3,
+            label=FRAMEWORK_LABEL.get(framework, framework), color=FRAMEWORK_COLOR.get(framework, "gray"), zorder=3,
         )
         for bar, label, height in zip(bars, offsets, heights):
             if height:
@@ -47,7 +48,8 @@ def plot(results, out_path: Path):
     ax.set_xticklabels([q.upper() for q in quant_classes])
     ax.set_xlabel("Quantization level")
     ax.set_ylabel("Decode tokens/sec")
-    ax.set_title(f"{results[0]['model']}: llama.cpp vs. MLC vs. TensorRT-Edge-LLM")
+    framework_title = " vs. ".join(FRAMEWORK_LABEL.get(f, f) for f in frameworks)
+    ax.set_title(f"{results[0]['model']}: {framework_title}")
     ax.legend()
     ax.grid(True, axis="y", alpha=0.3, zorder=0)
 

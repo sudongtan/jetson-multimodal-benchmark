@@ -1,0 +1,14 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "framework": "mlc",
+  "quantization": "q0f16",
+  "quant_class": "fp16",
+  "model_size_mb": 3116.71553,
+  "peak_memory_mb": 5788,
+  "avg_power_w": 8.39,
+  "timestamp": "2026-09-10T09:23:28",
+  "ttft_ms": 35.90806500000001,
+  "tokens_per_sec": 29.839632939486574,
+  "n_predict": 128,
+  "input_tokens": 1
+}
